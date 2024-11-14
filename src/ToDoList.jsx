@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, deleteTask } from "./Redux/actions";
+// import { addTask, deleteTask } from "./Redux/actions";
+import { addNewTodo, deleteTodo } from "./Redux/todoSlice";
 import "./style.css";
 
 function ToDoList() {
   const [task, setTask] = useState("");
-  const tasks = useSelector((state) => state.toDoListTasks.tasks);
+  const tasks = useSelector((state) => state.todoData.tasks);
   const dispatch = useDispatch();
 
   const handleAddTask = () => {
     if (task.trim()) {
-      dispatch(addTask(task));
+      dispatch(addNewTodo(task));
       setTask(" ");
     }
   };
@@ -39,7 +40,7 @@ function ToDoList() {
                 <button
                   class="todo-delete"
                   onClick={() => {
-                    dispatch(deleteTask(t.id));
+                    dispatch(deleteTodo(t.id));
                   }}
                 >
                   Delete
